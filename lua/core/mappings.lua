@@ -61,7 +61,7 @@ M.general = {
     ["<S-b>"] = { "<cmd> enew <CR>", "new buffer" },
 
     -- close buffer + hide terminal buffer
-    ["<leader>x"] = {
+    ["<C-w>"] = {
       function()
         require("core.utils").close_buffer()
       end,

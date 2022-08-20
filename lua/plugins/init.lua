@@ -200,27 +200,58 @@ local plugins = {
     end,
   },
 
-  -- Only load whichkey after all the gui
-  ["folke/which-key.nvim"] = {
-    disable = true,
-    module = "which-key",
-    keys = "<leader>",
+  -- dap
+  ["mfussenegger/nvim-dap"] = {
+    disable = false,
+    -- config = function()
+    --   require "plugins.dap"
+    -- end,
+    requires = {
+      "Pocco81/DAPInstall.nvim",
+      -- "mfussenegger/nvim-dap-python",
+    },
+  },
+  ["rcarriga/nvim-dap-ui"] = {
+    after = "nvim-dap",
     config = function()
-      require "plugins.configs.whichkey"
-    end,
-    setup = function()
-      require("core.utils").load_mappings "whichkey"
+      require("dapui").setup()
     end,
   },
+  ["puremourning/vimspector"] = {
+    -- config = function ()
+      --   require("vimspector")
+      -- end
+      cmd = { "VimspectorInstall", "VimspectorUpdate" },
+      fn = { "vimspector#Launch()", "vimspector#ToggleBreakpoint", "vimspector#Continue" },
+      config = function()
+        require("configs.vimspector").setup()
+      end,
+      run = "./install_gadget.py --enable-python --enable-c --enable-cpp"
+    },
+
+    -- Only load whichkey after all the gui
+    ["folke/which-key.nvim"] = {
+      disable = false,
+      module = "which-key",
+      keys = "<leader>",
+      config = function()
+        require "plugins.configs.whichkey"
+      end,
+      setup = function()
+        require("core.utils").load_mappings "whichkey"
+      end,
+    },
 
   -- Speed up deffered plugins
   ["lewis6991/impatient.nvim"] = {},
 }
-
+pcall(
+  vim.cmd,
+  [[
+augroup packer_user_config
+autocmd!
+autocmd BufWritePost init.lua source <afile> | PackerSync
+augroup end
+]]
+)
 require("core.packer").run(plugins)
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost init.lua source <afile> | PackerCompile
-  augroup end
-]])
