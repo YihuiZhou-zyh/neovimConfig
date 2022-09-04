@@ -9,8 +9,39 @@ local plugins = {
       require "plugins"
     end,
   },
+  -- markdowm
   ["NvChad/extensions"] = { module = { "telescope", "nvchad" } },
+  ["preservim/vim-markdown"] = {
+    config = function()
+      local ok, markdown = pcall(require, "vim-markdown")
 
+      if ok then
+        markdown.setup()
+      end
+    end,
+  },
+  ["iamcco/markdown-preview.nvim"] = {
+    run = "cd app && npm install",
+    setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
+    ft = { "markdown" }
+  },
+
+  -- ["ellisonleao/glow.nvim"] = {
+  --   config = function()
+  --     local ok, glow = pcall(require, "glow")
+  --     if ok then
+  --       glow.setup({
+  --         glow_path = "", -- filled automatically with your glow bin in $PATH,
+  --         glow_install_path = "~/.local/bin", -- default path for installing glow binary
+  --         border = "shadow", -- floating window border config
+  --         -- style = "dark|light", -- filled automatically with your current editor background, you can override using glow json style
+  --         pager = false,
+  --         width = 80,
+  --       })
+  --     end
+  --   end,
+  --
+  -- },
   ["NvChad/base46"] = {
     config = function()
       local ok, base46 = pcall(require, "base46")
@@ -216,6 +247,12 @@ local plugins = {
     config = function()
       require("dapui").setup()
     end,
+  },
+  ["mfussenegger/nvim-dap-python"] = {
+    after = "nvim-dap",
+    config = function()
+      require("dap-python").setup('/Users/zhouyihui/opt/anaconda3/bin/python')
+    end
   },
   -- ["puremourning/vimspector"] = {
   --   -- config = function ()
