@@ -1,3 +1,4 @@
+
 vim.defer_fn(function()
   pcall(require, "impatient")
 end, 0)
@@ -23,3 +24,4 @@ end
 pcall(require, "custom")
 
 require("core.utils").load_mappings()
+

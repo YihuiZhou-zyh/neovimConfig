@@ -138,6 +138,7 @@ M.gitsigns = function()
   local present, gitsigns = pcall(require, "gitsigns")
 
   if not present then
+    print("gitsigns are not present")
     return
   end
 

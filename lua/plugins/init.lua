@@ -217,30 +217,30 @@ local plugins = {
       require("dapui").setup()
     end,
   },
-  ["puremourning/vimspector"] = {
-    -- config = function ()
-      --   require("vimspector")
-      -- end
-      cmd = { "VimspectorInstall", "VimspectorUpdate" },
-      fn = { "vimspector#Launch()", "vimspector#ToggleBreakpoint", "vimspector#Continue" },
-      config = function()
-        require("configs.vimspector").setup()
-      end,
-      run = "./install_gadget.py --enable-python --enable-c --enable-cpp"
-    },
-
-    -- Only load whichkey after all the gui
-    ["folke/which-key.nvim"] = {
-      disable = false,
-      module = "which-key",
-      keys = "<leader>",
-      config = function()
-        require "plugins.configs.whichkey"
-      end,
-      setup = function()
-        require("core.utils").load_mappings "whichkey"
-      end,
-    },
+  -- ["puremourning/vimspector"] = {
+  --   -- config = function ()
+  --   --   require("vimspector")
+  --   -- end
+  --   cmd = { "VimspectorInstall", "VimspectorUpdate" },
+  --   fn = { "vimspector#Launch()", "vimspector#ToggleBreakpoint", "vimspector#Continue" },
+  --   config = function()
+  --     require("plugins.configs.vimspector").setup()
+  --   end,
+  --   run = "./install_gadget.py --enable-python --enable-c --enable-cpp"
+  -- },
+  --
+  -- Only load whichkey after all the gui
+  ["folke/which-key.nvim"] = {
+    disable = false,
+    module = "which-key",
+    keys = "<leader>",
+    config = function()
+      require "plugins.configs.whichkey"
+    end,
+    setup = function()
+      require("core.utils").load_mappings "whichkey"
+    end,
+  },
 
   -- Speed up deffered plugins
   ["lewis6991/impatient.nvim"] = {},
@@ -248,10 +248,10 @@ local plugins = {
 pcall(
   vim.cmd,
   [[
-augroup packer_user_config
-autocmd!
-autocmd BufWritePost init.lua source <afile> | PackerSync
-augroup end
-]]
+      augroup packer_user_config
+      autocmd!
+      autocmd BufWritePost init.lua source <afile> | PackerSync
+      augroup end
+    ]]
 )
 require("core.packer").run(plugins)

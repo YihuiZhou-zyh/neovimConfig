@@ -19,8 +19,8 @@ M.on_attach = function(client, bufnr)
     client.server_capabilities.documentRangeFormattingProvider = false
   else
     -- stable
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
+    client.resolved_capabilities.document_formatting = true
+    client.resolved_capabilities.document_range_formatting = true
   end
 
   utils.load_mappings("lspconfig", { buffer = bufnr })
@@ -70,5 +70,11 @@ lspconfig.sumneko_lua.setup {
     },
   },
 }
-
+local servers = { "html", "cssls", "clangd"}
+for _, lsp in ipairs(servers) do
+  lspconfig[lsp].setup {
+    on_attach = M.on_attach,
+    capabilities = M.capabilities,
+  }
+end
 return M

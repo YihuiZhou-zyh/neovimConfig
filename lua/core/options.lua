@@ -8,6 +8,8 @@ g.toggle_theme_icon = "   "
 g.transparency = config.ui.transparency
 g.theme_switcher_loaded = false
 g.vimspector_enable_mappings = 'HUMAN'
+-- vim.g.python2_host_prog = 'path/to/python2'
+
 -- use filetype.lua instead of filetype.vim. it's enabled by default in neovim 0.8 (nightly)
 if g.vim_version < 8 then
   g.did_load_filetypes = 0
@@ -36,6 +38,7 @@ opt.mouse = "a"
 -- Numbers
 opt.number = true
 opt.numberwidth = 2
+opt.relativenumber=true
 opt.ruler = false
 
 -- disable nvim intro
@@ -94,7 +97,6 @@ end
 local default_providers = {
   "node",
   "perl",
-  "python3",
   "ruby",
 }
 
